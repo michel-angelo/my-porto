@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap');
+
+/* CSS Variables */
+:root {
+  --bg-color: #0d0e12;
+  --bg-card: rgba(255, 255, 255, 0.02);
+  --border-color: rgba(255, 255, 255, 0.07);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --primary-gradient: linear-gradient(135deg, #a78bfa 0%, #38bdf8 100%);
+  --accent-purple: #8b5cf6;
+  --accent-blue: #0ea5e9;
+  --font-body: 'Outfit', sans-serif;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-clash {
+  font-family: 'ClashDisplay-Variable', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Monospace spacing for proportional font */
+.mono-spaced {
+  display: inline-flex;
+  justify-content: center;
+  letter-spacing: 0; /* Reset letter-spacing */
+}
+
+.mono-spaced span {
+  display: inline-block;
+  width: 0.72em; /* Uniform character cell width */
+  text-align: center;
+}
+
+.font-light {
+  font-family: 'ClashDisplay-Light', sans-serif;
+  font-weight: 300;
+}
+
+.font-regular {
+  font-family: 'ClashDisplay-Regular', sans-serif;
+  font-weight: 400;
+}
+
+.font-medium {
+  font-family: 'ClashDisplay-Medium', sans-serif;
+  font-weight: 500;
+}
+
+.font-semibold {
+  font-family: 'ClashDisplay-Semibold', sans-serif;
+  font-weight: 600;
+}
+
+.font-bold {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-weight: 700;
+}
