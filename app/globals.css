@@ -10,8 +10,17 @@
   --primary-gradient: linear-gradient(135deg, #a78bfa 0%, #38bdf8 100%);
   --accent-purple: #8b5cf6;
   --accent-blue: #0ea5e9;
-  --font-body: 'Outfit', sans-serif;
+  
+  /* Clash Display font-family as the main font */
+  --font-body: 'ClashDisplay-Variable', sans-serif;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Brutalist Theme Variables from example.html */
+  --kuning: #F5C800;
+  --merah: #C8392B;
+  --hitam: #111111;
+  --krem: #F0EAD6;
+  --abu: #8C8C8C;
 }
 
 /* Reset */
@@ -41,12 +50,12 @@ h4,
 .mono-spaced {
   display: inline-flex;
   justify-content: center;
-  letter-spacing: 0; /* Reset letter-spacing */
+  letter-spacing: 0;
 }
 
 .mono-spaced span {
   display: inline-block;
-  width: 0.72em; /* Uniform character cell width */
+  width: 0.72em;
   text-align: center;
 }
 
@@ -73,4 +82,899 @@ h4,
 .font-bold {
   font-family: 'ClashDisplay-Bold', sans-serif;
   font-weight: 700;
+}
+
+/* ==========================================================================
+   VIEW TRANSITION CUSTOM ANIMATIONS
+   ========================================================================== */
+
+/* Shutter reveal transition for page content */
+::view-transition-old(root) {
+  animation: 750ms cubic-bezier(0.85, 0, 0.15, 1) both exit-skew;
+  transform-origin: center;
+}
+
+::view-transition-new(root) {
+  animation: 900ms cubic-bezier(0.85, 0, 0.15, 1) both enter-brutalist;
+  transform-origin: center;
+}
+
+/* Make logo morph transition exceptionally smooth */
+::view-transition-group(branding) {
+  animation-duration: 900ms;
+  animation-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+@keyframes exit-skew {
+  0% {
+    transform: scale(1) skewX(0deg) rotate(0deg) translateX(0);
+    opacity: 1;
+    filter: brightness(1) invert(0);
+  }
+  30% {
+    transform: scale(0.95) skewX(-4deg) rotate(-1deg) translateX(-5vw);
+    opacity: 0.9;
+    filter: brightness(0.9) invert(0.2);
+  }
+  100% {
+    transform: scale(0.8) skewX(-15deg) rotate(-6deg) translateX(-100vw);
+    opacity: 0;
+    filter: brightness(0.3) invert(1);
+  }
+}
+
+@keyframes enter-brutalist {
+  0% {
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+    transform: scale(1.3) skewX(15deg) rotate(5deg) translateX(100vw);
+    filter: invert(1) contrast(250%) brightness(1.2);
+  }
+  35% {
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 10% 100%);
+    transform: scale(1.18) skewX(8deg) rotate(3deg) translateX(25vw);
+    filter: invert(1) contrast(250%) brightness(1.2);
+  }
+  60% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: scale(1.05) skewX(-2deg) rotate(-1deg) translateX(0);
+    filter: invert(0.85) contrast(180%) brightness(1.0);
+  }
+  75% {
+    filter: invert(0.18) contrast(130%) brightness(1.0);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    transform: scale(1) skewX(0deg) rotate(0deg) translateX(0);
+    filter: invert(0) contrast(100%) brightness(1);
+  }
+}
+
+/* ==========================================================================
+   BRUTALIST PORTFOLIO THEME (Adapted from example.html to Clash Display)
+   ========================================================================== */
+
+.brutalist-theme {
+  background: var(--krem);
+  color: var(--hitam);
+  font-family: 'ClashDisplay-Variable', sans-serif;
+  font-size: 13px;
+  overflow-x: hidden;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ── NAV ── */
+.bp-nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 16px 28px;
+  border-bottom: 1.5px solid var(--hitam);
+  background: var(--krem);
+}
+
+.bp-nav-left {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--abu);
+  font-family: 'ClashDisplay-Medium', sans-serif;
+}
+
+.bp-nav-logo {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--hitam);
+  font-weight: 700;
+}
+
+.bp-nav-logo span {
+  color: var(--merah);
+}
+
+.bp-nav-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.bp-nav-right a {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--hitam);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+}
+
+.bp-nav-right a:hover {
+  border-color: var(--merah);
+}
+
+/* ── HERO ── */
+.bp-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 340px;
+  border-bottom: 1.5px solid var(--hitam);
+}
+
+.bp-hero-left {
+  padding: 40px 32px;
+  border-right: 1.5px solid var(--hitam);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bp-hero-tagline {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 48px;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.bp-hero-tagline em {
+  font-style: normal;
+  color: var(--merah);
+  display: block;
+}
+
+.bp-hero-sub {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--abu);
+  max-width: 280px;
+  margin-top: 16px;
+  font-family: 'ClashDisplay-Regular', sans-serif;
+}
+
+.bp-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  padding: 10px 20px;
+  background: var(--hitam);
+  color: var(--kuning);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+.bp-hero-cta:hover {
+  background: var(--merah);
+  color: var(--krem);
+}
+
+.bp-hero-right {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--hitam);
+  color: var(--krem);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Big decorative number */
+.bp-hero-deco {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 160px;
+  line-height: 1;
+  color: rgba(245, 200, 0, 0.12);
+  position: absolute;
+  right: -10px;
+  bottom: -20px;
+  letter-spacing: -0.05em;
+  pointer-events: none;
+  user-select: none;
+  font-weight: 700;
+}
+
+.bp-hero-stat-label {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(240, 234, 214, 0.45);
+  margin-bottom: 4px;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+}
+
+.bp-hero-stat-val {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 36px;
+  color: var(--kuning);
+  line-height: 1;
+  font-weight: 700;
+}
+
+.bp-hero-stat-desc {
+  font-size: 11px;
+  color: rgba(240, 234, 214, 0.5);
+  margin-top: 4px;
+  line-height: 1.5;
+  max-width: 200px;
+}
+
+.bp-hero-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── SECTION TICKER ── */
+.bp-ticker {
+  background: var(--kuning);
+  border-bottom: 1.5px solid var(--hitam);
+  padding: 8px 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bp-ticker-inner {
+  display: inline-flex;
+  gap: 0;
+  animation: scroll-ticker 18s linear infinite;
+}
+
+.bp-ticker-item {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0 24px;
+  color: var(--hitam);
+  font-family: 'ClashDisplay-Bold', sans-serif;
+}
+
+.bp-ticker-sep {
+  color: var(--merah);
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 4px;
+}
+
+@keyframes scroll-ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── PAIN POINTS ── */
+.bp-pain-section {
+  border-bottom: 1.5px solid var(--hitam);
+}
+
+.bp-pain-header {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  border-bottom: 1.5px solid var(--hitam);
+}
+
+.bp-pain-header-num {
+  border-right: 1.5px solid var(--hitam);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 14px;
+  color: var(--abu);
+  padding: 12px;
+  font-weight: 700;
+}
+
+.bp-pain-header-title {
+  padding: 12px 20px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--abu);
+  display: flex;
+  align-items: center;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+}
+
+.bp-pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.bp-pain-card {
+  padding: 24px 22px;
+  border-right: 1.5px solid var(--hitam);
+  position: relative;
+  cursor: default;
+  transition: background 0.2s, color 0.2s;
+  background: transparent;
+}
+
+.bp-pain-card:last-child {
+  border-right: none;
+}
+
+.bp-pain-card:hover {
+  background: var(--hitam);
+  color: var(--krem);
+}
+
+.bp-pain-card:hover .bp-pain-q {
+  color: rgba(240, 234, 214, 0.45);
+}
+
+.bp-pain-card:hover .bp-pain-a {
+  color: var(--kuning);
+}
+
+.bp-pain-card:hover .bp-pain-arrow {
+  color: var(--kuning);
+  transform: translateX(5px);
+}
+
+.bp-pain-q {
+  font-size: 11px;
+  color: var(--abu);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  font-style: italic;
+  transition: color 0.2s;
+}
+
+.bp-pain-a {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 17px;
+  line-height: 1.25;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.bp-pain-arrow {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 18px;
+  color: var(--abu);
+  transition: all 0.2s;
+}
+
+/* ── KARYA / PORTO ── */
+.bp-porto-section {
+  border-bottom: 1.5px solid var(--hitam);
+}
+
+.bp-porto-header {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  border-bottom: 1.5px solid var(--hitam);
+  align-items: center;
+}
+
+.bp-porto-header-num {
+  border-right: 1.5px solid var(--hitam);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 14px;
+  color: var(--abu);
+  padding: 12px;
+  font-weight: 700;
+}
+
+.bp-porto-header-title {
+  padding: 12px 20px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--abu);
+  font-family: 'ClashDisplay-Medium', sans-serif;
+}
+
+.bp-porto-header-link {
+  padding: 12px 20px;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--merah);
+  border-left: 1.5px solid var(--hitam);
+  cursor: pointer;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  transition: background 0.2s;
+}
+
+.bp-porto-header-link:hover {
+  background: var(--hitam);
+  color: var(--kuning);
+}
+
+.bp-porto-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 140px 140px;
+}
+
+.bp-porto-card {
+  border-right: 1.5px solid var(--hitam);
+  border-bottom: 1.5px solid var(--hitam);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  transition: transform 0.3s ease;
+}
+
+.bp-porto-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.15);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.bp-porto-card:hover::after {
+  opacity: 1;
+}
+
+.bp-porto-card:nth-child(3),
+.bp-porto-card:nth-child(5) {
+  border-right: none;
+}
+
+.bp-porto-card:nth-child(4),
+.bp-porto-card:nth-child(5) {
+  border-bottom: none;
+}
+
+/* Card backgrounds Swiss-grid */
+.bp-porto-card:nth-child(1) { background: #1A1A18; grid-row: span 2; border-bottom: none; }
+.bp-porto-card:nth-child(2) { background: var(--merah); }
+.bp-porto-card:nth-child(3) { background: #2A2A27; }
+.bp-porto-card:nth-child(4) { background: var(--kuning); }
+.bp-porto-card:nth-child(5) { background: #E8E2CE; }
+
+.bp-porto-card-tag {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 1;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+}
+
+.bp-porto-card-title {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 16px;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+  font-weight: 700;
+}
+
+.bp-porto-card:nth-child(1) .bp-porto-card-tag,
+.bp-porto-card:nth-child(1) .bp-porto-card-title,
+.bp-porto-card:nth-child(3) .bp-porto-card-tag,
+.bp-porto-card:nth-child(3) .bp-porto-card-title { color: var(--krem); }
+
+.bp-porto-card:nth-child(2) .bp-porto-card-tag,
+.bp-porto-card:nth-child(2) .bp-porto-card-title { color: var(--krem); }
+
+.bp-porto-card:nth-child(4) .bp-porto-card-tag,
+.bp-porto-card:nth-child(4) .bp-porto-card-title { color: var(--hitam); }
+
+.bp-porto-card:nth-child(5) .bp-porto-card-tag,
+.bp-porto-card:nth-child(5) .bp-porto-card-title { color: var(--hitam); }
+
+/* Big decorative cross/star */
+.bp-porto-deco {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 60px;
+  color: rgba(245, 200, 0, 0.2);
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  transition: transform 0.5s ease;
+}
+
+.bp-porto-card:hover .bp-porto-deco {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* ── PROSES ── */
+.bp-proses-section {
+  border-bottom: 1.5px solid var(--hitam);
+}
+
+.bp-proses-header {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  border-bottom: 1.5px solid var(--hitam);
+}
+
+.bp-proses-header-num {
+  border-right: 1.5px solid var(--hitam);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 14px;
+  color: var(--abu);
+  padding: 12px;
+  font-weight: 700;
+}
+
+.bp-proses-header-title {
+  padding: 12px 20px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--abu);
+  display: flex;
+  align-items: center;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+}
+
+.bp-proses-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.bp-proses-step {
+  padding: 22px 20px;
+  border-right: 1.5px solid var(--hitam);
+  position: relative;
+  background: transparent;
+}
+
+.bp-proses-step:last-child {
+  border-right: none;
+}
+
+.bp-proses-step-num {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 38px;
+  color: rgba(17,17,17,0.08);
+  line-height: 1;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.bp-proses-step-title {
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+}
+
+.bp-proses-step-desc {
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--abu);
+}
+
+.bp-proses-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--hitam);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+.bp-proses-step:hover .bp-proses-bar {
+  transform: scaleX(1);
+}
+
+.bp-proses-step:nth-child(1):hover .bp-proses-bar { background: var(--kuning); }
+.bp-proses-step:nth-child(2):hover .bp-proses-bar { background: var(--merah); }
+.bp-proses-step:nth-child(3):hover .bp-proses-bar { background: var(--hitam); }
+.bp-proses-step:nth-child(4):hover .bp-proses-bar { background: var(--kuning); }
+
+/* ── FOOTER CTA ── */
+.bp-footer-cta {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding: 32px 28px;
+  background: var(--hitam);
+  color: var(--krem);
+  gap: 20px;
+}
+
+.bp-footer-q {
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  font-size: 26px;
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.bp-footer-q em {
+  font-style: normal;
+  color: var(--kuning);
+}
+
+.bp-footer-btn {
+  padding: 12px 24px;
+  background: var(--kuning);
+  color: var(--hitam);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+}
+
+.bp-footer-btn:hover {
+  background: var(--merah);
+  color: var(--krem);
+}
+
+.bp-footer-micro {
+  font-size: 10px;
+  color: rgba(240,234,214,0.35);
+  letter-spacing: 0.08em;
+  margin-top: 8px;
+}
+
+/* ==========================================================================
+   HOMEPAGE SWISS TYPOGRAPHY POSTER GRID LAYOUT (Opsi 1: Fixed Grid / Giant Fonts)
+   ========================================================================== */
+
+.swiss-poster {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--krem); /* Portfolio Cream Background */
+  color: var(--hitam); /* Portfolio Black Text */
+  overflow: hidden;
+  user-select: none;
+  font-family: 'ClashDisplay-Variable', sans-serif;
+}
+
+/* Guide Lines styling */
+.swiss-grid-v {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(17, 17, 17, 0.15); /* Dark grey grid guides */
+  z-index: 1;
+}
+
+.swiss-grid-h {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(17, 17, 17, 0.15); /* Dark grey grid guides */
+  z-index: 1;
+}
+
+/* Inner elements container */
+.swiss-poster-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.swiss-lbl {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+  color: var(--hitam);
+}
+
+/* Title text container */
+.swiss-title-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 96px;
+  left: 32px;
+}
+
+.swiss-title-container a {
+  text-decoration: none;
+}
+
+.swiss-title-row {
+  display: block;
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  color: var(--hitam);
+  font-family: 'ClashDisplay-Variable', sans-serif;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), color 0.4s ease;
+  cursor: pointer;
+  width: fit-content;
+}
+
+/* Giant sizes calibrated to align to grid vertical columns */
+.swiss-title-sssab {
+  font-size: 11.5vw; /* Calibrated to fit 56% boundary */
+}
+
+.swiss-title-studio {
+  font-size: 9.8vw; /* Calibrated to fit 56% boundary */
+}
+
+.swiss-title-portfolio {
+  font-size: 8.8vw; /* Calibrated to fit 80% boundary */
+}
+
+.swiss-title-row:hover {
+  transform: translateX(10px) scale(1.02);
+  color: var(--merah);
+}
+
+.swiss-style-tag {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  font-family: 'ClashDisplay-Regular', sans-serif;
+  color: var(--hitam);
+  margin-left: 24px;
+}
+
+/* Disciplines list ( Josef Müller-Brockmann column ) */
+.swiss-disciplines {
+  position: absolute;
+  top: 99px;
+  left: 56%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: 'ClashDisplay-Semibold', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.swiss-discipline-item {
+  margin: 0px 0px 5px 15px;
+  color: var(--hitam);
+  letter-spacing: -0.01em;
+}
+
+/* Clickable enter link */
+.swiss-enter-link {
+  position: absolute;
+  top: calc(68% + 32px);
+  left: 32px;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--hitam);
+  border-bottom: 2.2px solid var(--hitam);
+  padding-bottom: 4px;
+  font-family: 'ClashDisplay-Bold', sans-serif;
+  transition: all 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  display: inline-block;
+}
+
+.swiss-enter-link:hover {
+  color: var(--merah);
+  border-color: var(--merah);
+  transform: translateX(10px);
+}
+
+/* Spaced bottom footer labels */
+.swiss-poster-footer {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'ClashDisplay-Medium', sans-serif;
+}
+
+/* Mobile responsive stacked layouts */
+@media (max-width: 768px) {
+  .swiss-poster {
+    height: auto;
+    min-height: 100vh;
+    overflow-y: auto;
+  }
+  .swiss-grid-v {
+    display: none;
+  }
+  .swiss-grid-h {
+    left: 24px;
+    right: 24px;
+  }
+  .swiss-poster-inner {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: auto;
+    min-height: 100vh;
+    justify-content: space-between;
+  }
+  .swiss-lbl {
+    position: static;
+  }
+  .swiss-title-container {
+    position: static;
+    margin-top: 80px;
+  }
+  .swiss-title-sssab, .swiss-title-studio, .swiss-title-portfolio {
+    font-size: 13vw;
+  }
+  .swiss-disciplines {
+    position: static;
+    display: flex;
+  }
+  .swiss-enter-link {
+    position: static;
+    width: fit-content;
+  }
+  .swiss-poster-footer {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
 }
