@@ -16,7 +16,7 @@ export default function RootLayout({
       <head>
         <link rel="stylesheet" href="/ClashDisplay_Compete_Font/css/clash-display.css" />
       </head>
-      <body style={{ justifyContent: "center", alignItems: "center", display: "flex", height: "100vh", width: "100vw" }}>
+      <body>
         {children}
       </body>
     </html>
